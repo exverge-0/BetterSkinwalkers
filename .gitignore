@@ -5,6 +5,7 @@
 # IDEs
 .vscode
 .idea
+*.user
 
 # C# and binaries
 bin
