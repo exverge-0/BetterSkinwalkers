@@ -1,0 +1,17 @@
+# Mac
+.DS_Store
+._*
+
+# IDEs
+.vscode
+.idea
+
+# C# and binaries
+bin
+obj
+*.exe
+*.dll
+*.pdb
+Dependencies
+
+Package
