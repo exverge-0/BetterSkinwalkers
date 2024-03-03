@@ -41,6 +41,20 @@ public class SkinwalkerBehavior
         float num;
         if ((bool) (Object) __instance.ai && !__instance.ai.isEnemyDead)
         {
+            if (__instance.ai.gameObject.name == "DressGirl(Clone)" && Plugin.Instance.OnlyHauntedHearsGirl.Value)
+            {
+                DressGirlAI ai = (DressGirlAI) __instance.ai;
+                if (ai.hauntingPlayer != StartOfRound.Instance.localPlayerController)
+                {
+                    SkinwalkerLogger.Log(__instance.name + " played voice line no (not haunted) EnemyAI: " + __instance.ai);
+                    return false;
+                }
+                if (!ai.staringInHaunt && !ai.moveTowardsDestination)
+                {
+                    SkinwalkerLogger.Log(__instance.name + " played voice line no (not visible) EnemyAI: " + __instance.ai);
+                    return false;
+                }
+            }
             Vector3 a = StartOfRound.Instance.localPlayerController.isPlayerDead ? StartOfRound.Instance.spectateCamera.transform.position : StartOfRound.Instance.localPlayerController.transform.position;
             if (StartOfRound.Instance == null || StartOfRound.Instance.localPlayerController == null || (num = Vector3.Distance(a, __instance.transform.position)) < 100.0)
             {
