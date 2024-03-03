@@ -1,13 +1,12 @@
-using System.Diagnostics.CodeAnalysis;
 using HarmonyLib;
 using SkinwalkerMod;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
+// ReSharper disable InconsistentNaming
 namespace BetterSkinwalkers;
 
-[SuppressMessage("ReSharper", "InconsistentNaming")]
 public class SkinwalkerBehavior
 {
     [HarmonyPatch(typeof(SkinwalkerBehaviour), "SetNextTime")]
@@ -27,10 +26,10 @@ public class SkinwalkerBehavior
                                                      .VoiceLineFrequency.Value;
             }
             else
-            {
+            { 
                 __instance.nextTimeToPlayAudio = Time.time +
-                                                 Random.Range(15f, 40f) / SkinwalkerNetworkManager.Instance
-                                                     .VoiceLineFrequency.Value;
+                                               Random.Range(15f, 40f) / SkinwalkerNetworkManager.Instance
+                                                   .VoiceLineFrequency.Value;
             }
         }
         return false;

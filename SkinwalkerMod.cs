@@ -6,6 +6,7 @@ using SkinwalkerMod;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+// ReSharper disable InconsistentNaming
 
 namespace BetterSkinwalkers;
 
@@ -96,9 +97,19 @@ public class SkinwalkerMod
         __instance.nextTimeToCheckEnemies = Time.realtimeSinceStartup + 5f;
         foreach (EnemyAI enemyAi in Object.FindObjectsOfType<EnemyAI>(true))
         {
-            SkinwalkerLogger.Log("IsEnemyEnabled " + enemyAi.name + " " + __instance.IsEnemyEnabled(enemyAi));
-            if (__instance.IsEnemyEnabled(enemyAi) && !enemyAi.TryGetComponent(out SkinwalkerBehaviour _))
-                enemyAi.gameObject.AddComponent<SkinwalkerBehaviour>().Initialize(enemyAi);
+            try
+            {
+                SkinwalkerLogger.Log("IsEnemyEnabled " + enemyAi.name + " " + __instance.IsEnemyEnabled(enemyAi));
+                if (__instance.IsEnemyEnabled(enemyAi) && !enemyAi.TryGetComponent(out SkinwalkerBehaviour _))
+                    enemyAi.gameObject.AddComponent<SkinwalkerBehaviour>().Initialize(enemyAi);
+            }
+            catch (NullReferenceException e) // BetterSkinwalkers#2: Mod conflict issue where an EnemyAI is created without a game-object
+            {
+                SkinwalkerLogger.LogError("BetterSkinWalkers: An error has occurred checking an invalid EnemyAI for "+enemyAi.name+" that is missing a game object.");
+                SkinwalkerLogger.LogWarning("BetterSkinwalkers: If this is a modded enemy, it is most likely an issue with that mod");
+                SkinwalkerLogger.LogWarning("BetterSkinwalkers: Otherwise, please report this to BetterSkinwalkers.");
+                SkinwalkerLogger.LogError(e);
+            }
         }
 
         return false;

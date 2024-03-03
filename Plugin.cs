@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BepInEx;
-using Dissonance.Config;
 using HarmonyLib;
 
 namespace BetterSkinwalkers
@@ -10,7 +9,7 @@ namespace BetterSkinwalkers
     [BepInDependency("RugbugRedfern.SkinwalkerMod")] // Who knew .RubbugRedfern was a domain?
     public class Plugin : BaseUnityPlugin
     {
-        public readonly Harmony harmony = new("xyz.exverge.betterskinwalkers");
+        private readonly Harmony harmony = new("xyz.exverge.betterskinwalkers");
         
         private void Awake()
         {
