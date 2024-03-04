@@ -105,10 +105,11 @@ public class SkinwalkerMod
             }
             catch (NullReferenceException e) // BetterSkinwalkers#2: Mod conflict issue where an EnemyAI is created without a game-object
             {
-                SkinwalkerLogger.LogError("BetterSkinWalkers: An error has occurred checking an invalid EnemyAI for "+enemyAi.name+" that is missing a game object.");
-                SkinwalkerLogger.LogWarning("BetterSkinwalkers: If this is a modded enemy, it is most likely an issue with that mod");
-                SkinwalkerLogger.LogWarning("BetterSkinwalkers: Otherwise, please report this to BetterSkinwalkers.");
-                SkinwalkerLogger.LogError(e);
+                SkinwalkerLogger.LogWarning("BetterSkinWalkers: An error has occurred checking an invalid EnemyAI for "+enemyAi.name+" that is missing a game object.");
+                SkinwalkerLogger.LogWarning("BetterSkinwalkers: Most of the time you can safely ignore this unless it is occuring repeatedly.");
+                SkinwalkerLogger.LogWarning("BetterSkinwalkers: If this is occurring repeatedly with an unmodded enemy or with multiple modded enemies,");
+                SkinwalkerLogger.LogWarning("BetterSkinwalkers: please report it to BetterSkinwalkers, otherwise please report this message to the relevant mod.");
+                SkinwalkerLogger.LogWarning(e);
             }
         }
 

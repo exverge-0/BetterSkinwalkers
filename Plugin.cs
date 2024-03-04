@@ -6,7 +6,7 @@ using HarmonyLib;
 
 namespace BetterSkinwalkers
 {
-    [BepInPlugin("xyz.exverge.betterskinwalkers", "BetterSkinWalkers", "0.2.0")]
+    [BepInPlugin("xyz.exverge.betterskinwalkers", "BetterSkinWalkers", "0.2.1")]
     [BepInDependency("RugbugRedfern.SkinwalkerMod")] // Who knew .RubbugRedfern was a domain?
     public class Plugin : BaseUnityPlugin
     {
