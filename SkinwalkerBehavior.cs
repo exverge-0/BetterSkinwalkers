@@ -39,7 +39,7 @@ public class SkinwalkerBehavior
     public static bool AttemptPlaySound(ref SkinwalkerBehaviour __instance)
     {
         float num;
-        if ((bool) (Object) __instance.ai && !__instance.ai.isEnemyDead)
+        if ((bool) (Object) __instance.ai && !__instance.ai.isEnemyDead && StartOfRound.Instance != null && StartOfRound.Instance.localPlayerController != null)
         {
             if (__instance.ai.gameObject.name == "DressGirl(Clone)" && Plugin.Instance.OnlyHauntedHearsGirl.Value)
             {
@@ -56,7 +56,7 @@ public class SkinwalkerBehavior
                 }
             }
             Vector3 a = StartOfRound.Instance.localPlayerController.isPlayerDead ? StartOfRound.Instance.spectateCamera.transform.position : StartOfRound.Instance.localPlayerController.transform.position;
-            if (StartOfRound.Instance == null || StartOfRound.Instance.localPlayerController == null || (num = Vector3.Distance(a, __instance.transform.position)) < 100.0)
+            if ((num = Vector3.Distance(a, __instance.transform.position)) < 100.0)
             {
                 AudioClip sample = __instance.ai is MaskedPlayerEnemy masked ? SkinwalkerMod.GetPlayerSpecificSample(masked.mimickingPlayer.voicePlayerState.Name) : SkinwalkerModPersistent.Instance.GetSample();
                 if ((bool) sample)
