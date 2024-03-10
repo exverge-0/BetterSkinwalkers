@@ -67,8 +67,33 @@ public class SkinwalkerBehavior
                 else
                     SkinwalkerLogger.Log(__instance.name + " played voice line 0");
             }
+            else if(__instance.ai is MaskedPlayerEnemy masked && StartOfRound.Instance.localPlayerController.holdingWalkieTalkie && Plugin.Random.Next(100)+1 <= Plugin.Instance.ChanceMimicUsesWalkie.Value)
+            {
+                AudioClip sample = SkinwalkerMod.GetPlayerSpecificSample(masked.mimickingPlayer.voicePlayerState.Name);
+                if ((bool)sample)
+                {
+                    SkinwalkerLogger.Log(__instance.name + " played voice line 1 (walkie)");
+                    bool played = false;
+                    foreach (var walkie in WalkieTalkie.allWalkieTalkies)
+                    {
+                        if (walkie.playerHeldBy == StartOfRound.Instance.localPlayerController)
+                        {
+                            played = true;
+                            walkie.thisAudio.PlayOneShot(sample);
+                            break;
+                        }
+                    }
+                    SkinwalkerLogger.Log(played ? __instance.name + " played voice line 1 (walkie)" : __instance.name + " played voice line 0 (walkie)");
+                }
+                else
+                {
+                    SkinwalkerLogger.Log(__instance.name + " played voice line 0");
+                }
+            }
             else
+            {
                 SkinwalkerLogger.Log(__instance.name + " played voice line no (too far away) " + num);
+            }
         }
         else
             SkinwalkerLogger.Log(__instance.name + " played voice line no (dead) EnemyAI: " + __instance.ai);
